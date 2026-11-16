@@ -1,1621 +1,693 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BioAventura - Biologia 9º Ano</title>
-
+<title>Super Saúde</title>
 <style>
-
-*{
-    box-sizing:border-box;
+:root {
+    --vinho:#702d43;
+    --vinho2:#93465e;
+    --marrom:#39251f;
+    --marrom2:#624438;
+    --bege:#f4e8d8;
+    --creme:#fff9f1;
+    --rosa:#d9a5a9;
+}
+* {box-sizing:border-box}
+body {
     margin:0;
-    padding:0;
-}
-
-body{
     font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#dff7e8,#e4efff);
+    background:linear-gradient(135deg,var(--marrom),var(--vinho));
+    color:#38251f;
     min-height:100vh;
-    color:#17212b;
 }
-
-.container{
-    width:94%;
-    max-width:1050px;
-    margin:25px auto;
-}
-
-header{
-    background:white;
+header {
+    background:var(--marrom);
+    color:var(--bege);
     padding:20px;
-    border-radius:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 5px 20px #0001;
-}
-
-header h1{
-    color:#168052;
-}
-
-header p{
-    color:#667;
-    margin-top:5px;
-}
-
-button{
-    cursor:pointer;
-    border:none;
-    border-radius:10px;
-    padding:12px 16px;
-    font-weight:bold;
-}
-
-#reiniciar{
-    background:#edf2f3;
-}
-
-.tela{
-    margin-top:20px;
-}
-
-.escondido{
-    display:none;
-}
-
-/* MENU */
-
-.inicio{
-    background:white;
     text-align:center;
-    padding:35px;
-    border-radius:22px;
-    box-shadow:0 5px 20px #0001;
+    border-bottom:4px solid var(--vinho2);
 }
-
-.inicio .icone{
-    font-size:65px;
-}
-
-.inicio h2{
-    margin:10px 0;
-}
-
-.inicio p{
-    color:#667;
-}
-
-.estatisticas-menu{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    margin-top:20px;
-}
-
-.estatisticas-menu span{
-    background:#edf8f2;
-    padding:10px 18px;
-    border-radius:10px;
-}
-
-.titulo{
-    margin:25px 0 12px;
-}
-
-.fases{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.fase{
-    background:white;
-    padding:20px;
+header h1 {margin:0}
+.container {max-width:950px;margin:25px auto;padding:15px}
+.painel {
+    background:var(--creme);
+    padding:25px;
     border-radius:18px;
-    box-shadow:0 5px 15px #0001;
-    border:2px solid #e3e9e6;
+    box-shadow:0 8px 25px #1e101080;
+    margin-bottom:20px;
 }
-
-.fase.bloqueada{
-    opacity:.55;
-}
-
-.icone-fase{
-    font-size:42px;
-}
-
-.fase h3{
-    margin:10px 0;
-}
-
-.fase p{
-    color:#68747a;
-    min-height:40px;
-    font-size:14px;
-}
-
-.fase button{
-    width:100%;
-    margin-top:15px;
-    background:#23885e;
+h2,h3 {color:var(--vinho)}
+button {
+    background:var(--vinho);
     color:white;
-}
-
-.fase button:disabled{
-    background:#aaa;
-}
-
-.medalha{
-    display:inline-block;
-    margin-top:10px;
-    background:#fff0ae;
-    padding:5px 10px;
+    border:0;
+    padding:12px 17px;
     border-radius:10px;
-    font-size:12px;
-}
-
-/* QUIZ */
-
-.topo{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-#voltar{
-    background:#edf2f3;
-}
-
-.progresso-container{
-    flex:1;
-}
-
-.info{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:7px;
+    cursor:pointer;
     font-weight:bold;
+    margin:5px 3px;
 }
-
-.barra{
-    height:10px;
-    background:#d5dedb;
-    border-radius:20px;
-    overflow:hidden;
+button:hover {background:var(--marrom2)}
+input {
+    width:100%;
+    padding:12px;
+    border:2px solid #c9a9a0;
+    border-radius:9px;
+    margin:8px 0 15px;
+    font-size:16px;
 }
-
-#barraProgresso{
-    height:100%;
-    width:0;
-    background:#23885e;
-    transition:.3s;
-}
-
-.vidas{
-    font-size:21px;
-}
-
-.pergunta-box{
-    background:white;
-    padding:30px;
-    border-radius:22px;
-    margin-top:20px;
-    box-shadow:0 5px 20px #0001;
-}
-
-.assunto{
-    display:inline-block;
-    background:#e3f5ec;
-    color:#16764c;
-    padding:7px 12px;
-    border-radius:10px;
-    font-size:13px;
-    font-weight:bold;
-}
-
-#pergunta{
-    margin:20px 0;
-    font-size:25px;
-}
-
-.respostas{
+input[type=radio],input[type=checkbox] {width:auto;margin-right:8px}
+.menu {
     display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
     gap:12px;
 }
-
-.resposta{
-    background:#fafafa;
-    border:2px solid #dce5e2;
-    text-align:left;
-    width:100%;
+.menu button {
+    min-height:85px;
+    font-size:16px;
+    background:var(--marrom2);
 }
-
-.resposta:hover:not(:disabled){
-    border-color:#39a36f;
-}
-
-.correta{
-    background:#d9f5e5 !important;
-    border-color:#30a66b !important;
-}
-
-.errada{
-    background:#ffe0e0 !important;
-    border-color:#df6b6b !important;
-}
-
-#feedback{
-    min-height:30px;
-    margin-top:15px;
-    font-weight:bold;
-}
-
-#proxima{
-    background:#23885e;
-    color:white;
-    display:none;
-}
-
-/* RESULTADO */
-
-.resultado{
-    background:white;
-    max-width:600px;
-    margin:auto;
-    padding:40px;
-    text-align:center;
-    border-radius:22px;
-    box-shadow:0 5px 20px #0001;
-}
-
-.resultado-icon{
-    font-size:70px;
-}
-
-.resultado h2{
-    margin:10px 0;
-}
-
-.resultado p{
-    color:#667;
-}
-
-.resultado-info{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    margin:25px;
-}
-
-.resultado-info div{
-    background:#edf5f1;
-    padding:15px 25px;
-    border-radius:12px;
-}
-
-.resultado-info strong{
+.menu button:hover {background:var(--vinho)}
+.opcao {
     display:block;
-    font-size:25px;
-    color:#19764f;
+    background:var(--bege);
+    border:2px solid #dfc8b9;
+    padding:13px;
+    margin:9px 0;
+    border-radius:10px;
+    cursor:pointer;
 }
-
-#voltarMapa{
-    background:#23885e;
-    color:white;
+.opcao:hover {border-color:var(--vinho);background:#f1dfe0}
+.pergunta {
+    background:#f8eee6;
+    padding:16px;
+    border-radius:12px;
+    margin:15px 0;
 }
-
-/* CELULAR */
-
-@media(max-width:650px){
-
-    header{
-        flex-direction:column;
-        gap:15px;
-        text-align:center;
-    }
-
-    .topo{
-        flex-wrap:wrap;
-    }
-
-    .progresso-container{
-        order:3;
-        flex-basis:100%;
-    }
-
-    #pergunta{
-        font-size:21px;
-    }
-
-    .estatisticas-menu{
-        flex-direction:column;
-    }
-
+.resultado {
+    background:#f2e2d9;
+    border-left:5px solid var(--vinho);
+    padding:15px;
+    border-radius:8px;
+    margin:12px 0;
 }
-
+.escondido {display:none!important}
+.topo-atividade {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    border-bottom:1px solid #dfc8b9;
+    padding-bottom:12px;
+    margin-bottom:18px;
+}
+.topo-atividade h2 {margin:5px 0}
+.botoes-navegacao {display:flex;gap:5px;flex-wrap:wrap}
+.botoes-navegacao button {font-size:14px}
+.progresso {
+    background:#dfcfc3;
+    height:14px;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0;
+}
+.barra {
+    background:var(--vinho);
+    height:100%;
+    width:0;
+    transition:.4s;
+}
+.dica {
+    background:#f4e8d8;
+    border:1px solid #d9bda9;
+    padding:14px;
+    border-radius:10px;
+    margin:12px 0;
+}
+.circulo {
+    width:130px;height:130px;margin:25px auto;
+    border-radius:50%;background:var(--rosa);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--marrom);font-weight:bold;
+    transition:transform 4s;
+}
+footer {text-align:center;color:var(--bege);padding:20px}
+@media(max-width:600px) {
+    .painel {padding:17px}
+    .topo-atividade {align-items:flex-start}
+}
 </style>
 </head>
-
 <body>
+
+<header>
+    <h1>🍇 Super Saúde</h1>
+    <p>Pequenas atitudes para uma vida mais saudável!</p>
+</header>
 
 <div class="container">
 
-<header>
-
-    <div>
-        <h1>🧬 BioAventura</h1>
-        <p>Desafio de Biologia - 9º Ano</p>
-    </div>
-
-    <button id="reiniciar">
-        🔄 Reiniciar
-    </button>
-
-</header>
-
-
-<!-- ================= MENU ================= -->
-
-<section id="menu" class="tela">
-
-    <div class="inicio">
-
-        <div class="icone">🔬</div>
-
-        <h2>BioAventura</h2>
-
-        <p>
-            Responda às perguntas, ganhe pontos
-            e desbloqueie todas as fases!
-        </p>
-
-        <div class="estatisticas-menu">
-
-            <span>
-                ⭐ Pontos:
-                <b id="pontos">0</b>
-            </span>
-
-            <span>
-                🏆 Medalhas:
-                <b id="medalhas">0</b>
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <h2 class="titulo">
-        🗺️ Mapa das Fases
-    </h2>
-
-    <div id="fases" class="fases"></div>
-
+<section id="login" class="painel">
+    <h2>Bem-vindo ao Super Saúde!</h2>
+    <p>Entre com seu nome e senha para começar.</p>
+    <label>Nome:</label>
+    <input id="nome" placeholder="Digite seu nome">
+    <label>Senha:</label>
+    <input id="senha" type="password" placeholder="Digite uma senha">
+    <button onclick="entrar()">Entrar</button>
+    <button onclick="cadastrar()">Criar conta</button>
+    <p id="mensagemLogin"></p>
+    <small>Cadastro demonstrativo. Não use uma senha pessoal ou importante.</small>
 </section>
 
+<section id="inicio" class="painel escondido">
+    <h2>Olá, <span id="jogador"></span>! 👋</h2>
+    <p>Escolha uma atividade para começar.</p>
+    <p>⭐ Pontos: <span id="pontos">0</span> | 🏅 Atividades: <span id="conquistas">0</span></p>
+    <div class="progresso"><div class="barra" id="barraGeral"></div></div>
 
-<!-- ================= QUIZ ================= -->
-
-<section id="quiz" class="tela escondido">
-
-    <div class="topo">
-
-        <button id="voltar">
-            ← Fases
-        </button>
-
-        <div class="progresso-container">
-
-            <div class="info">
-
-                <span id="nomeFase"></span>
-
-                <span id="numero"></span>
-
-            </div>
-
-            <div class="barra">
-
-                <div id="barraProgresso"></div>
-
-            </div>
-
-        </div>
-
-        <div class="vidas" id="vidas">
-            ❤️❤️❤️
-        </div>
-
+    <div class="menu">
+        <button onclick="abrir('alimentacao')">🥗 Alimentação</button>
+        <button onclick="abrir('ansiedade')">🧠 Mente tranquila</button>
+        <button onclick="abrir('exercicio')">🏃 Energia em movimento</button>
+        <button onclick="abrir('vida')">💗 Vida saudável</button>
     </div>
-
-
-    <div class="pergunta-box">
-
-        <span id="assunto" class="assunto"></span>
-
-        <h2 id="pergunta"></h2>
-
-        <div id="respostas" class="respostas"></div>
-
-        <p id="feedback"></p>
-
-        <button id="proxima">
-            Próxima pergunta →
-        </button>
-
-    </div>
-
+    <br>
+    <button onclick="sair()">🚪 Sair da conta</button>
 </section>
 
+<!-- ALIMENTAÇÃO -->
+<section id="alimentacao" class="painel escondido">
+    <div class="topo-atividade">
+        <h2>🥗 Minha alimentação</h2>
+        <div class="botoes-navegacao">
+            <button onclick="voltarInicio()">🏠 Início</button>
+            <button onclick="sair()">🚪 Sair</button>
+        </div>
+    </div>
 
-<!-- ================= RESULTADO ================= -->
+    <p>
+        Vamos conhecer seus hábitos alimentares! Responda às perguntas,
+        veja as dicas e descubra alternativas que podem ajudar no seu dia a dia.
+    </p>
 
-<section id="resultado" class="tela escondido">
+    <div class="progresso"><div class="barra" id="barraAlimentos"></div></div>
+    <p id="numeroPergunta">Pergunta 1 de 6</p>
 
+    <div id="areaPergunta"></div>
+    <div id="dicaPergunta" class="dica escondido"></div>
+
+    <button id="btnResponder" onclick="responderAlimento()">Ver dica</button>
+    <button id="btnProxima" class="escondido" onclick="proximaPergunta()">Próxima pergunta →</button>
+
+    <div id="resultadoAlimentacao" class="escondido"></div>
+
+    <div class="dica">
+        <strong>💡 Lembrete:</strong> uma alimentação saudável não precisa
+        ser cara nem perfeita. O importante é buscar variedade e respeitar
+        suas necessidades e sua realidade.
+    </div>
+</section>
+
+<!-- MENTE -->
+<section id="ansiedade" class="painel escondido">
+    <div class="topo-atividade">
+        <h2>🧠 Mente tranquila</h2>
+        <div class="botoes-navegacao">
+            <button onclick="voltarInicio()">🏠 Início</button>
+            <button onclick="sair()">🚪 Sair</button>
+        </div>
+    </div>
+    <p>Faça uma pausa e acompanhe o ritmo da respiração.</p>
+    <div class="circulo" id="circulo">Vamos começar?</div>
+    <p id="textoResp" style="text-align:center">Clique para iniciar.</p>
+    <div style="text-align:center">
+        <button onclick="respirar()">Iniciar respiração</button>
+        <button onclick="pararResp()">Parar</button>
+    </div>
     <div class="resultado">
-
-        <div id="resultadoIcon" class="resultado-icon">
-            🏆
-        </div>
-
-        <h2 id="resultadoTitulo">
-            Fase concluída!
-        </h2>
-
-        <p id="resultadoTexto"></p>
-
-
-        <div class="resultado-info">
-
-            <div>
-                <strong id="resultadoPontos">
-                    0
-                </strong>
-
-                <small>
-                    Pontos
-                </small>
-            </div>
-
-            <div>
-                <strong id="resultadoAcertos">
-                    0/10
-                </strong>
-
-                <small>
-                    Acertos
-                </small>
-            </div>
-
-        </div>
-
-
-        <button id="voltarMapa">
-            🗺️ Voltar para o mapa
-        </button>
-
+        <h3>Exercício 5-4-3-2-1</h3>
+        <p>Observe ao seu redor e tente identificar:</p>
+        <ul>
+            <li>5 coisas que você consegue ver.</li>
+            <li>4 coisas que consegue tocar.</li>
+            <li>3 sons que consegue ouvir.</li>
+            <li>2 cheiros que consegue sentir.</li>
+            <li>1 coisa que consegue perceber pelo paladar.</li>
+        </ul>
     </div>
+    <button onclick="concluir('ansiedade')">Concluir atividade</button>
+</section>
 
+<!-- EXERCÍCIOS -->
+<section id="exercicio" class="painel escondido">
+    <div class="topo-atividade">
+        <h2>🏃 Energia em movimento</h2>
+        <div class="botoes-navegacao">
+            <button onclick="voltarInicio()">🏠 Início</button>
+            <button onclick="sair()">🚪 Sair</button>
+        </div>
+    </div>
+    <p>Escolha uma atividade leve para movimentar o corpo.</p>
+    <div class="pergunta">
+        <label class="opcao"><input type="radio" name="movimento" value="Alongamento leve"> Alongamento leve</label>
+        <label class="opcao"><input type="radio" name="movimento" value="Marcha parada"> Marcha parada</label>
+        <label class="opcao"><input type="radio" name="movimento" value="Movimentar os braços"> Movimentar os braços</label>
+        <label class="opcao"><input type="radio" name="movimento" value="Caminhada leve"> Caminhada leve</label>
+    </div>
+    <h3 id="atividadeEscolhida">Escolha uma atividade.</h3>
+    <h2 id="tempo" style="text-align:center">30 segundos</h2>
+    <div style="text-align:center">
+        <button onclick="iniciarExercicio()">Começar</button>
+        <button onclick="pararExercicio()">Parar</button>
+    </div>
+    <p id="mensagemExercicio"></p>
+    <button onclick="concluir('exercicio')">Concluir atividade</button>
+</section>
+
+<!-- VIDA SAUDÁVEL -->
+<section id="vida" class="painel escondido">
+    <div class="topo-atividade">
+        <h2>💗 Guardião da Saúde</h2>
+        <div class="botoes-navegacao">
+            <button onclick="voltarInicio()">🏠 Início</button>
+            <button onclick="sair()">🚪 Sair</button>
+        </div>
+    </div>
+    <p>Marque as atitudes saudáveis que você conseguiu praticar hoje.</p>
+    <div class="pergunta">
+        <label class="opcao"><input type="checkbox"> Bebi água durante o dia.</label>
+        <label class="opcao"><input type="checkbox"> Tentei descansar bem.</label>
+        <label class="opcao"><input type="checkbox"> Cuidei da minha higiene.</label>
+        <label class="opcao"><input type="checkbox"> Fiz alguma atividade que gosto.</label>
+        <label class="opcao"><input type="checkbox"> Conversei com alguém de confiança.</label>
+        <label class="opcao"><input type="checkbox"> Reservei um momento para mim.</label>
+    </div>
+    <p id="mensagemVida"></p>
+    <button onclick="salvarMissoes()">Salvar missões</button>
+    <button onclick="concluir('vida')">Concluir atividade</button>
 </section>
 
 </div>
 
+<footer>Super Saúde | Cuidar de si também é uma conquista.</footer>
 
 <script>
+let contaAtual = null;
+let breathTimer = null;
+let exerciseTimer = null;
+let tempoRestante = 30;
+let faseResp = 0;
+let perguntaAtual = 0;
+let respostasAlimentos = [];
 
-/* =========================================
-   DADOS DAS FASES
-========================================= */
-
-const fases = [
-
+const perguntas = [
 {
-    nome:"Mundo das Células",
-    icone:"🔬",
-    descricao:"Aprenda sobre células e organelas.",
-
-    perguntas:[
-
-        {
-            pergunta:"Qual estrutura controla as atividades da célula?",
-
-            respostas:[
-                "Núcleo",
-                "Parede celular",
-                "Ribossomo",
-                "Citoplasma"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Qual organela produz energia para a célula?",
-
-            respostas:[
-                "Lisossomo",
-                "Mitocôndria",
-                "Vacúolo",
-                "Núcleo"
-            ],
-
-            correta:1
-        },
-
-        {
-            pergunta:"Qual estrutura está presente em células animais e vegetais?",
-
-            respostas:[
-                "Cloroplasto",
-                "Parede celular",
-                "Membrana plasmática",
-                "Vacúolo central"
-            ],
-
-            correta:2
-        },
-
-        {
-            pergunta:"As células vegetais possuem cloroplastos para realizar:",
-
-            respostas:[
-                "Digestão",
-                "Fotossíntese",
-                "Respiração",
-                "Divisão"
-            ],
-
-            correta:1
-        },
-
-        {
-            pergunta:"A unidade básica dos seres vivos é:",
-
-            respostas:[
-                "Órgão",
-                "Tecido",
-                "Célula",
-                "Sistema"
-            ],
-
-            correta:2
-        }
-
-    ]
+    titulo:"Como costuma ser seu café da manhã?",
+    opcoes:[
+        "Geralmente não tomo café da manhã.",
+        "Como alguma coisa rápida, como pão ou biscoito.",
+        "Costumo variar e incluir frutas ou outros alimentos."
+    ],
+    dica:[
+        "Se sentir fome pela manhã, tente incluir uma refeição que combine com sua rotina.",
+        "Você pode complementar seu pão com ovo, queijo ou uma fruta, se tiver disponível.",
+        "Muito bem! Continue variando os alimentos conforme suas preferências."
+    ],
+    alternativa:"Ideias: pão com ovo, banana com aveia, cuscuz com ovo ou fruta com iogurte."
 },
-
-
 {
-    nome:"Reprodução",
-    icone:"🧬",
-    descricao:"Aprenda sobre reprodução e fecundação.",
-
-    perguntas:[
-
-        {
-            pergunta:"A união do espermatozoide com o óvulo é chamada de:",
-
-            respostas:[
-                "Ovulação",
-                "Fecundação",
-                "Menstruação",
-                "Mitose"
-            ],
-
-            correta:1
-        },
-
-        {
-            pergunta:"O gameta masculino humano é:",
-
-            respostas:[
-                "Óvulo",
-                "Embrião",
-                "Espermatozoide",
-                "Zigoto"
-            ],
-
-            correta:2
-        },
-
-        {
-            pergunta:"O gameta feminino humano é:",
-
-            respostas:[
-                "Óvulo",
-                "Espermatozoide",
-                "Zigoto",
-                "Embrião"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"O zigoto surge após:",
-
-            respostas:[
-                "Fecundação",
-                "Respiração",
-                "Digestão",
-                "Fotossíntese"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"A reprodução assexuada geralmente envolve:",
-
-            respostas:[
-                "Um único organismo",
-                "Dois gametas",
-                "Fecundação",
-                "Somente animais"
-            ],
-
-            correta:0
-        }
-
-    ]
+    titulo:"Com que frequência você come frutas?",
+    opcoes:[
+        "Quase nunca.",
+        "Algumas vezes na semana.",
+        "Todos os dias ou quase todos os dias."
+    ],
+    dica:[
+        "Comece com uma fruta de que você goste. Não precisa mudar tudo de uma vez.",
+        "Uma ideia é deixar uma fruta disponível para um lanche.",
+        "Ótimo! Continue variando as frutas quando puder."
+    ],
+    alternativa:"Opções acessíveis: banana, mamão, melancia, laranja e frutas da estação."
 },
-
-
 {
-    nome:"Vírus em Ação",
-    icone:"🦠",
-    descricao:"Aprenda sobre vírus, doenças e vacinas.",
-
-    perguntas:[
-
-        {
-            pergunta:"Os vírus são considerados:",
-
-            respostas:[
-                "Células completas",
-                "Acelulares",
-                "Bactérias",
-                "Fungos"
-            ],
-
-            correta:1
-        },
-
-        {
-            pergunta:"Os vírus precisam de uma célula hospedeira para:",
-
-            respostas:[
-                "Se reproduzir",
-                "Fazer fotossíntese",
-                "Produzir ossos",
-                "Digestionar alimentos"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"A vacinação ajuda a:",
-
-            respostas:[
-                "Preparar o sistema imunológico",
-                "Causar doenças",
-                "Substituir o sangue",
-                "Produzir bactérias"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Qual doença é causada por vírus?",
-
-            respostas:[
-                "Gripe",
-                "Tétano",
-                "Tuberculose",
-                "Cólera"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Uma maneira importante de prevenir doenças é:",
-
-            respostas:[
-                "Lavar as mãos",
-                "Compartilhar objetos pessoais",
-                "Não tomar vacinas",
-                "Não beber água"
-            ],
-
-            correta:0
-        }
-
-    ]
+    titulo:"Você costuma comer verduras e legumes?",
+    opcoes:[
+        "Raramente.",
+        "Às vezes.",
+        "Sim, com frequência."
+    ],
+    dica:[
+        "Experimente começar com pequenas porções de um legume que você goste.",
+        "Tente acrescentar um legume ou uma verdura em uma das refeições.",
+        "Muito bem! Variar as cores dos vegetais ajuda a trazer diferentes nutrientes."
+    ],
+    alternativa:"Experimente cenoura, abóbora, tomate, couve, beterraba ou chuchu."
 },
-
-
 {
-    nome:"Corpo Humano",
-    icone:"🫀",
-    descricao:"Explore os sistemas do corpo humano.",
-
-    perguntas:[
-
-        {
-            pergunta:"Qual órgão bombeia o sangue?",
-
-            respostas:[
-                "Pulmão",
-                "Coração",
-                "Fígado",
-                "Estômago"
-            ],
-
-            correta:1
-        },
-
-        {
-            pergunta:"Qual sistema realiza a digestão?",
-
-            respostas:[
-                "Digestório",
-                "Nervoso",
-                "Respiratório",
-                "Urinário"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"As trocas gasosas acontecem principalmente nos:",
-
-            respostas:[
-                "Alvéolos",
-                "Rins",
-                "Ossos",
-                "Músculos"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"O cérebro pertence ao sistema:",
-
-            respostas:[
-                "Nervoso",
-                "Digestório",
-                "Respiratório",
-                "Urinário"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Os rins pertencem ao sistema:",
-
-            respostas:[
-                "Urinário",
-                "Respiratório",
-                "Nervoso",
-                "Reprodutor"
-            ],
-
-            correta:0
-        }
-
-    ]
+    titulo:"O que você costuma beber durante o dia?",
+    opcoes:[
+        "Principalmente refrigerantes ou bebidas açucaradas.",
+        "Água e outras bebidas.",
+        "Principalmente água."
+    ],
+    dica:[
+        "Tente deixar uma garrafinha de água por perto e diminuir aos poucos as bebidas açucaradas.",
+        "Continue lembrando de beber água ao longo do dia.",
+        "Ótimo! A água é uma boa escolha para a hidratação."
+    ],
+    alternativa:"Uma opção é levar uma garrafa de água. Água gelada ou com rodelas de fruta pode ajudar a variar o sabor."
 },
-
-
 {
-    nome:"Evolução",
-    icone:"🦎",
-    descricao:"Entenda a evolução e a seleção natural.",
-
-    perguntas:[
-
-        {
-            pergunta:"Quem é associado à seleção natural?",
-
-            respostas:[
-                "Charles Darwin",
-                "Gregor Mendel",
-                "Isaac Newton",
-                "Louis Pasteur"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"A seleção natural favorece características que:",
-
-            respostas:[
-                "Ajudam na sobrevivência e reprodução",
-                "Sempre deixam o animal maior",
-                "Eliminam toda diversidade",
-                "Nunca mudam"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"A evolução acontece ao longo de:",
-
-            respostas:[
-                "Gerações",
-                "Minutos",
-                "Uma refeição",
-                "Uma única vida"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Fósseis podem fornecer evidências sobre:",
-
-            respostas:[
-                "Organismos do passado",
-                "Somente o clima",
-                "Somente vírus",
-                "Espécies que nunca mudaram"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"A diversidade genética é importante para:",
-
-            respostas:[
-                "A evolução das populações",
-                "A digestão",
-                "A respiração",
-                "A produção de água"
-            ],
-
-            correta:0
-        }
-
-    ]
+    titulo:"Com que frequência você come doces, salgadinhos ou fast-food?",
+    opcoes:[
+        "Quase todos os dias.",
+        "Algumas vezes na semana.",
+        "De vez em quando."
+    ],
+    dica:[
+        "Não precisa proibir seus alimentos preferidos. Experimente incluir outras opções e variar mais as refeições.",
+        "Tente equilibrar esses alimentos com refeições variadas ao longo da semana.",
+        "Continue buscando variedade. Comer com equilíbrio é mais importante do que buscar perfeição."
+    ],
+    alternativa:"Para variar os lanches, experimente pipoca feita em casa, fruta, milho cozido, sanduíche simples ou iogurte."
 },
-
-
 {
-    nome:"Ecologia",
-    icone:"🌱",
-    descricao:"Proteja os ecossistemas e a biodiversidade.",
-
-    perguntas:[
-
-        {
-            pergunta:"Os produtores de uma cadeia alimentar são geralmente:",
-
-            respostas:[
-                "Plantas e algas",
-                "Carnívoros",
-                "Fungos",
-                "Humanos"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Os consumidores obtêm energia principalmente ao:",
-
-            respostas:[
-                "Alimentar-se de outros organismos",
-                "Fazer fotossíntese",
-                "Produzir luz",
-                "Respirar água"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Os decompositores incluem principalmente:",
-
-            respostas:[
-                "Fungos e bactérias",
-                "Leões",
-                "Árvores",
-                "Peixes"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Seres vivos e fatores não vivos formam um:",
-
-            respostas:[
-                "Ecossistema",
-                "Órgão",
-                "Cromossomo",
-                "Tecido"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Biodiversidade significa:",
-
-            respostas:[
-                "Variedade de seres vivos",
-                "Quantidade de água",
-                "Somente árvores",
-                "Temperatura"
-            ],
-
-            correta:0
-        }
-
-    ]
-},
-
-
-{
-    nome:"Genética - Desafio Final",
-    icone:"🧪",
-    descricao:"Teste seus conhecimentos sobre DNA e genes.",
-
-    perguntas:[
-
-        {
-            pergunta:"O DNA está relacionado principalmente à:",
-
-            respostas:[
-                "Informação genética",
-                "Digestão",
-                "Respiração",
-                "Produção de urina"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Os genes são segmentos de:",
-
-            respostas:[
-                "DNA",
-                "Água",
-                "Gordura",
-                "Cálcio"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Gregor Mendel estudou principalmente:",
-
-            respostas:[
-                "Hereditariedade",
-                "Ecologia",
-                "Vírus",
-                "Sistema respiratório"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"Uma versão de um gene é chamada de:",
-
-            respostas:[
-                "Alelo",
-                "Órgão",
-                "Tecido",
-                "Vírus"
-            ],
-
-            correta:0
-        },
-
-        {
-            pergunta:"A genética ajuda a explicar:",
-
-            respostas:[
-                "Como características são herdadas",
-                "Como os rios se formam",
-                "Somente a fotossíntese",
-                "Somente a digestão"
-            ],
-
-            correta:0
-        }
-
-    ]
+    titulo:"Como costuma ser seu almoço?",
+    opcoes:[
+        "Geralmente como pouca variedade ou pulo essa refeição.",
+        "Como arroz, feijão ou outros alimentos, mas pouca variedade.",
+        "Costumo variar entre arroz, feijão, legumes e alguma proteína."
+    ],
+    dica:[
+        "Quando possível, tente fazer uma refeição completa, com alimentos que estejam disponíveis em casa.",
+        "Você já tem uma base! Experimente acrescentar uma fruta ou algum legume quando puder.",
+        "Muito bem! Arroz, feijão, vegetais e uma fonte de proteína formam uma combinação variada."
+    ],
+    alternativa:"Exemplo de refeição: arroz, feijão, ovo, frango ou peixe e salada ou legumes. Não é necessário ter todos esses alimentos sempre."
 }
-
 ];
 
-
-/* =========================================
-   VARIÁVEIS
-========================================= */
-
-let faseAtual = 0;
-
-let perguntaAtual = 0;
-
-let acertos = 0;
-
-let vidas = 3;
-
-let pontos = 0;
-
-let pontosFase = 0;
-
-let fasesDesbloqueadas =
-    Number(localStorage.getItem("fases")) || 1;
-
-let medalhas =
-    Number(localStorage.getItem("medalhas")) || 0;
-
-
-/* =========================================
-   ELEMENTOS
-========================================= */
-
-const menu =
-    document.getElementById("menu");
-
-const quiz =
-    document.getElementById("quiz");
-
-const resultado =
-    document.getElementById("resultado");
-
-
-/* =========================================
-   SALVAR
-========================================= */
-
-function salvar(){
-
-    localStorage.setItem(
-        "fases",
-        fasesDesbloqueadas
-    );
-
-    localStorage.setItem(
-        "medalhas",
-        medalhas
-    );
-
-    localStorage.setItem(
-        "pontos",
-        pontos
-    );
+function contas() {
+    return JSON.parse(localStorage.getItem("superSaudeContas") || "{}");
+}
+function salvarContas(dados) {
+    localStorage.setItem("superSaudeContas", JSON.stringify(dados));
 }
 
+function cadastrar() {
+    let nome = document.getElementById("nome").value.trim();
+    let senha = document.getElementById("senha").value;
+    let msg = document.getElementById("mensagemLogin");
 
-/* =========================================
-   MOSTRAR FASES
-========================================= */
+    if (!nome || !senha) {
+        msg.textContent = "Preencha seu nome e sua senha.";
+        return;
+    }
 
-function mostrarFases(){
+    let dados = contas();
+    let chave = nome.toLowerCase();
 
-    pontos =
-        Number(localStorage.getItem("pontos")) || 0;
+    if (dados[chave]) {
+        msg.textContent = "Essa conta já existe. Faça login.";
+        return;
+    }
 
-    document.getElementById("pontos")
-        .textContent = pontos;
+    dados[chave] = {nome, senha, pontos:0, concluidas:[]};
+    salvarContas(dados);
+    msg.textContent = "Conta criada! Agora clique em entrar.";
+}
 
-    document.getElementById("medalhas")
-        .textContent = medalhas;
+function entrar() {
+    let nome = document.getElementById("nome").value.trim();
+    let senha = document.getElementById("senha").value;
+    let dados = contas();
+    let chave = nome.toLowerCase();
 
+    if (!dados[chave] || dados[chave].senha !== senha) {
+        mensagemLogin.textContent = "Nome ou senha incorretos.";
+        return;
+    }
 
-    const container =
-        document.getElementById("fases");
+    contaAtual = dados[chave];
+    document.getElementById("jogador").textContent = contaAtual.nome;
+    mostrar("inicio");
+    atualizarPainel();
+}
 
-    container.innerHTML = "";
+function atualizarPainel() {
+    pontos.textContent = contaAtual.pontos;
+    conquistas.textContent = contaAtual.concluidas.length;
+    barraGeral.style.width = (contaAtual.concluidas.length / 4 * 100) + "%";
+}
 
+function mostrar(id) {
+    document.querySelectorAll(".container > section").forEach(secao => {
+        secao.classList.add("escondido");
+    });
+    document.getElementById(id).classList.remove("escondido");
+}
 
-    fases.forEach((fase,index)=>{
+function abrir(id) {
+    mostrar(id);
+    if (id === "alimentacao") iniciarQuestionario();
+}
 
-        const div =
-            document.createElement("div");
+function voltarInicio() {
+    pararResp();
+    pararExercicio();
+    mostrar("inicio");
+}
 
-        div.className = "fase";
+function sair() {
+    pararResp();
+    pararExercicio();
+    contaAtual = null;
+    mostrar("login");
+    document.getElementById("nome").value = "";
+    document.getElementById("senha").value = "";
+}
 
+function concluir(id) {
+    if (!contaAtual) return;
 
-        if(index >= fasesDesbloqueadas){
+    if (contaAtual.concluidas.includes(id)) {
+        alert("Você já concluiu essa atividade. Muito bem!");
+        return;
+    }
 
-            div.classList.add("bloqueada");
+    contaAtual.concluidas.push(id);
+    contaAtual.pontos += 50;
 
-        }
+    let dados = contas();
+    dados[contaAtual.nome.toLowerCase()] = contaAtual;
+    salvarContas(dados);
+    atualizarPainel();
+    alert("Parabéns! Você concluiu a atividade e ganhou 50 pontos!");
+}
 
+/* JOGO DA ALIMENTAÇÃO */
+function iniciarQuestionario() {
+    perguntaAtual = 0;
+    respostasAlimentos = [];
+    document.getElementById("resultadoAlimentacao").classList.add("escondido");
+    document.getElementById("areaPergunta").classList.remove("escondido");
+    document.getElementById("dicaPergunta").classList.add("escondido");
+    document.getElementById("btnResponder").classList.remove("escondido");
+    document.getElementById("btnProxima").classList.add("escondido");
+    mostrarPergunta();
+}
 
-        const concluida =
-            localStorage.getItem(
-                "medalha"+index
-            );
+function mostrarPergunta() {
+    let p = perguntas[perguntaAtual];
+    document.getElementById("numeroPergunta").textContent =
+        "Pergunta " + (perguntaAtual + 1) + " de " + perguntas.length;
+    document.getElementById("barraAlimentos").style.width =
+        (perguntaAtual / perguntas.length * 100) + "%";
 
+    let html = "<div class='pergunta'><h3>" + p.titulo + "</h3>";
 
-        div.innerHTML = `
-
-            <div class="icone-fase">
-                ${
-                    index < fasesDesbloqueadas
-                    ? fase.icone
-                    : "🔒"
-                }
-            </div>
-
-            <h3>
-                Fase ${index+1}:
-                ${fase.nome}
-            </h3>
-
-            <p>
-                ${fase.descricao}
-            </p>
-
-            ${
-                concluida
-                ?
-                '<span class="medalha">🏅 Concluída</span>'
-                :
-                ''
-            }
-
-            <button
-                ${
-                    index >= fasesDesbloqueadas
-                    ? "disabled"
-                    : ""
-                }
-                onclick="iniciarFase(${index})">
-
-                ${
-                    index >= fasesDesbloqueadas
-                    ? "🔒 Bloqueada"
-                    : "Jogar"
-                }
-
-            </button>
-
-        `;
-
-
-        container.appendChild(div);
-
+    p.opcoes.forEach((opcao, i) => {
+        html += `<label class="opcao">
+            <input type="radio" name="respostaAlimento" value="${i}">
+            ${opcao}
+        </label>`;
     });
 
+    html += "</div>";
+    document.getElementById("areaPergunta").innerHTML = html;
+    document.getElementById("dicaPergunta").classList.add("escondido");
+    document.getElementById("btnResponder").classList.remove("escondido");
+    document.getElementById("btnProxima").classList.add("escondido");
 }
 
-
-/* =========================================
-   INICIAR FASE
-========================================= */
-
-function iniciarFase(index){
-
-    faseAtual = index;
-
-    perguntaAtual = 0;
-
-    acertos = 0;
-
-    vidas = 3;
-
-    pontosFase = 0;
-
-
-    menu.classList.add("escondido");
-
-    quiz.classList.remove("escondido");
-
-    resultado.classList.add("escondido");
-
-
-    carregarPergunta();
-
-}
-
-
-/* =========================================
-   CARREGAR PERGUNTA
-========================================= */
-
-function carregarPergunta(){
-
-    const fase =
-        fases[faseAtual];
-
-    const pergunta =
-        fase.perguntas[perguntaAtual];
-
-
-    document.getElementById("nomeFase")
-        .textContent =
-        "Fase " +
-        (faseAtual+1) +
-        " - " +
-        fase.nome;
-
-
-    document.getElementById("numero")
-        .textContent =
-        (perguntaAtual+1) +
-        "/" +
-        fase.perguntas.length;
-
-
-    document.getElementById("barraProgresso")
-        .style.width =
-        (
-            perguntaAtual /
-            fase.perguntas.length
-        ) * 100 + "%";
-
-
-    document.getElementById("assunto")
-        .textContent =
-        fase.nome;
-
-
-    document.getElementById("pergunta")
-        .textContent =
-        pergunta.pergunta;
-
-
-    document.getElementById("feedback")
-        .textContent = "";
-
-
-    const respostas =
-        document.getElementById("respostas");
-
-    respostas.innerHTML = "";
-
-
-    document.getElementById("proxima")
-        .style.display = "none";
-
-
-    pergunta.respostas.forEach(
-        (resposta,index)=>{
-
-            const botao =
-                document.createElement("button");
-
-            botao.className =
-                "resposta";
-
-            botao.textContent =
-                String.fromCharCode(65+index)
-                + ") "
-                + resposta;
-
-            botao.onclick =
-                ()=>responder(index);
-
-            respostas.appendChild(botao);
-
-        }
-    );
-
-
-    atualizarVidas();
-
-}
-
-
-/* =========================================
-   RESPONDER
-========================================= */
-
-function responder(escolha){
-
-    const pergunta =
-        fases[faseAtual]
-        .perguntas[perguntaAtual];
-
-
-    const botoes =
-        document.querySelectorAll(
-            ".resposta"
-        );
-
-
-    botoes.forEach(
-        botao =>
-        botao.disabled = true
-    );
-
-
-    if(escolha === pergunta.correta){
-
-        acertos++;
-
-        pontosFase += 100;
-
-        pontos += 100;
-
-
-        botoes[escolha]
-            .classList.add("correta");
-
-
-        document.getElementById("feedback")
-            .textContent =
-            "✅ Muito bem! +100 pontos";
-
-    }
-
-    else{
-
-        vidas--;
-
-
-        botoes[escolha]
-            .classList.add("errada");
-
-
-        botoes[pergunta.correta]
-            .classList.add("correta");
-
-
-        document.getElementById("feedback")
-            .textContent =
-            "❌ Resposta errada!";
-
-    }
-
-
-    atualizarVidas();
-
-    salvar();
-
-
-    document.getElementById("proxima")
-        .style.display = "inline-block";
-
-
-    if(
-        perguntaAtual ===
-        fases[faseAtual].perguntas.length-1
-    ){
-
-        document.getElementById("proxima")
-            .textContent =
-            "🏆 Ver resultado";
-
-    }
-
-}
-
-
-/* =========================================
-   PRÓXIMA
-========================================= */
-
-document.getElementById("proxima")
-.onclick = function(){
-
-    if(
-        vidas <= 0 ||
-        perguntaAtual ===
-        fases[faseAtual].perguntas.length-1
-    ){
-
-        finalizar();
-
+function responderAlimento() {
+    let marcada = document.querySelector('input[name="respostaAlimento"]:checked');
+
+    if (!marcada) {
+        alert("Escolha uma alternativa antes de continuar.");
         return;
-
     }
 
+    let escolha = Number(marcada.value);
+    respostasAlimentos[perguntaAtual] = escolha;
 
+    let p = perguntas[perguntaAtual];
+    let dica = document.getElementById("dicaPergunta");
+
+    dica.innerHTML = `
+        <h3>💡 Uma dica para você</h3>
+        <p>${p.dica[escolha]}</p>
+        <p><strong>🥑 Algumas alternativas:</strong> ${p.alternativa}</p>
+    `;
+    dica.classList.remove("escondido");
+    document.getElementById("btnResponder").classList.add("escondido");
+    document.getElementById("btnProxima").classList.remove("escondido");
+}
+
+function proximaPergunta() {
     perguntaAtual++;
 
-    carregarPergunta();
-
-};
-
-
-/* =========================================
-   VIDAS
-========================================= */
-
-function atualizarVidas(){
-
-    document.getElementById("vidas")
-        .textContent =
-        "❤️".repeat(vidas) +
-        "🖤".repeat(3-vidas);
-
+    if (perguntaAtual < perguntas.length) {
+        mostrarPergunta();
+    } else {
+        finalizarAlimentacao();
+    }
 }
 
+function finalizarAlimentacao() {
+    document.getElementById("areaPergunta").classList.add("escondido");
+    document.getElementById("dicaPergunta").classList.add("escondido");
+    document.getElementById("btnResponder").classList.add("escondido");
+    document.getElementById("btnProxima").classList.add("escondido");
+    document.getElementById("numeroPergunta").textContent = "Atividade finalizada!";
+    document.getElementById("barraAlimentos").style.width = "100%";
 
-/* =========================================
-   FINALIZAR
-========================================= */
+    let boas = 0;
+    respostasAlimentos.forEach(v => { if (v === 2) boas++; });
 
-function finalizar(){
-
-    const total =
-        fases[faseAtual].perguntas.length;
-
-
-    const passou =
-        vidas > 0 &&
-        acertos >= Math.ceil(total*0.7);
-
-
-    quiz.classList.add("escondido");
-
+    let resultado = document.getElementById("resultadoAlimentacao");
     resultado.classList.remove("escondido");
 
+    resultado.innerHTML = `
+        <h2>🌷 Sua jornada alimentar</h2>
+        <div class="resultado">
+            <h3>Você respondeu às 6 perguntas!</h3>
+            <p>Suas respostas mostram alguns hábitos que já fazem parte da sua rotina e outros que podem ser trabalhados aos poucos.</p>
+            <p><strong>${boas} de 6 respostas</strong> foram nas alternativas que indicam hábitos mais frequentes de variedade ou equilíbrio. Isso não é uma nota sobre sua saúde.</p>
+        </div>
 
-    document.getElementById(
-        "resultadoPontos"
-    ).textContent =
-        pontosFase;
+        <div class="resultado">
+            <h3>🥗 Missão: monte um prato variado</h3>
+            <p>Imagine uma refeição com alguns desses grupos:</p>
+            <label class="opcao"><input type="checkbox"> Arroz, batata, macarrão, mandioca ou cuscuz.</label>
+            <label class="opcao"><input type="checkbox"> Feijão, lentilha ou ervilha.</label>
+            <label class="opcao"><input type="checkbox"> Ovo, frango, peixe ou outra proteína.</label>
+            <label class="opcao"><input type="checkbox"> Verduras e legumes.</label>
+            <label class="opcao"><input type="checkbox"> Uma fruta que você goste.</label>
+            <p>Não precisa ter todos os itens em todas as refeições. Use o que estiver disponível e faça combinações variadas.</p>
+        </div>
 
+        <div class="resultado">
+            <h3>🌱 Desafio para esta semana</h3>
+            <p>Escolha uma pequena mudança que seja possível para você: beber mais água, experimentar uma fruta, acrescentar um legume ou variar o lanche.</p>
+            <p>O importante é avançar no seu ritmo, sem culpa e sem dietas restritivas.</p>
+        </div>
 
-    document.getElementById(
-        "resultadoAcertos"
-    ).textContent =
-        acertos + "/" + total;
+        <button onclick="concluir('alimentacao')">🏆 Concluir atividade</button>
+        <button onclick="iniciarQuestionario()">Refazer perguntas</button>
+    `;
 
-
-    if(passou){
-
-        document.getElementById(
-            "resultadoIcon"
-        ).textContent =
-            "🏆";
-
-
-        document.getElementById(
-            "resultadoTitulo"
-        ).textContent =
-            "Parabéns! Fase concluída!";
-
-
-        document.getElementById(
-            "resultadoTexto"
-        ).textContent =
-            "Você desbloqueou a próxima fase!";
-
-
-        if(
-            !localStorage.getItem(
-                "medalha"+faseAtual
-            )
-        ){
-
-            medalhas++;
-
-            localStorage.setItem(
-                "medalha"+faseAtual,
-                "1"
-            );
-
-        }
-
-
-        if(
-            fasesDesbloqueadas <=
-            faseAtual+1
-        ){
-
-            fasesDesbloqueadas =
-                faseAtual+2;
-
-        }
-
-    }
-
-    else{
-
-        document.getElementById(
-            "resultadoIcon"
-        ).textContent =
-            "💪";
-
-
-        document.getElementById(
-            "resultadoTitulo"
-        ).textContent =
-            "Você quase conseguiu!";
-
-
-        document.getElementById(
-            "resultadoTexto"
-        ).textContent =
-            "Tente novamente para desbloquear a próxima fase.";
-
-    }
-
-
-    salvar();
-
+    resultado.scrollIntoView({behavior:"smooth"});
 }
 
+/* RESPIRAÇÃO */
+function respirar() {
+    pararResp();
+    faseResp = 0;
+    proximaResp();
+}
 
-/* =========================================
-   VOLTAR
-========================================= */
+function proximaResp() {
+    let circulo = document.getElementById("circulo");
+    let texto = document.getElementById("textoResp");
 
-document.getElementById("voltar")
-.onclick = function(){
-
-    quiz.classList.add("escondido");
-
-    menu.classList.remove("escondido");
-
-    mostrarFases();
-
-};
-
-
-document.getElementById("voltarMapa")
-.onclick = function(){
-
-    resultado.classList.add("escondido");
-
-    menu.classList.remove("escondido");
-
-    mostrarFases();
-
-};
-
-
-/* =========================================
-   REINICIAR
-========================================= */
-
-document.getElementById("reiniciar")
-.onclick = function(){
-
-    if(
-        confirm(
-            "Apagar todo o progresso?"
-        )
-    ){
-
-        localStorage.clear();
-
-        fasesDesbloqueadas = 1;
-
-        medalhas = 0;
-
-        pontos = 0;
-
-        mostrarFases();
-
+    if (faseResp >= 6) {
+        texto.textContent = "Você terminou o exercício. Muito bem!";
+        circulo.textContent = "Parabéns!";
+        circulo.style.transform = "scale(1)";
+        breathTimer = null;
+        return;
     }
 
-};
+    if (faseResp % 2 === 0) {
+        texto.textContent = "Inspire devagar...";
+        circulo.textContent = "Inspire";
+        circulo.style.transform = "scale(1.35)";
+    } else {
+        texto.textContent = "Solte o ar lentamente...";
+        circulo.textContent = "Solte o ar";
+        circulo.style.transform = "scale(1)";
+    }
 
+    faseResp++;
+    breathTimer = setTimeout(proximaResp,4000);
+}
 
-/* =========================================
-   COMEÇAR
-========================================= */
+function pararResp() {
+    if (breathTimer) clearTimeout(breathTimer);
+    breathTimer = null;
+    let circulo = document.getElementById("circulo");
+    if (circulo) {
+        circulo.style.transform = "scale(1)";
+        circulo.textContent = "Pausa";
+    }
+}
 
-mostrarFases();
+/* EXERCÍCIOS */
+function iniciarExercicio() {
+    pararExercicio();
 
+    let movimento = document.querySelector('input[name="movimento"]:checked');
+
+    if (!movimento) {
+        alert("Escolha uma atividade primeiro.");
+        return;
+    }
+
+    tempoRestante = 30;
+    atividadeEscolhida.textContent = movimento.value;
+    tempo.textContent = tempoRestante + " segundos";
+    mensagemExercicio.textContent =
+        "Faça os movimentos no seu ritmo. Pare se sentir dor, tontura ou desconforto.";
+
+    exerciseTimer = setInterval(() => {
+        tempoRestante--;
+        tempo.textContent = tempoRestante + " segundos";
+
+        if (tempoRestante <= 0) {
+            pararExercicio();
+            mensagemExercicio.textContent =
+                "Muito bem! Você terminou os 30 segundos de movimento.";
+        }
+    },1000);
+}
+
+function pararExercicio() {
+    if (exerciseTimer) clearInterval(exerciseTimer);
+    exerciseTimer = null;
+}
+
+/* VIDA SAUDÁVEL */
+function salvarMissoes() {
+    let marcadas = document.querySelectorAll('#vida input[type="checkbox"]:checked').length;
+    document.getElementById("mensagemVida").textContent =
+        "Você marcou " + marcadas + " de 6 atitudes. Continue cuidando de você!";
+}
 </script>
-
 </body>
 </html>
