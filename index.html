@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BioAventura - Biologia 9º Ano</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#dff7e8,#e4efff);
+    min-height:100vh;
+    color:#17212b;
+}
+
+.container{
+    width:94%;
+    max-width:1050px;
+    margin:25px auto;
+}
+
+header{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 5px 20px #0001;
+}
+
+header h1{
+    color:#168052;
+}
+
+header p{
+    color:#667;
+    margin-top:5px;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    padding:12px 16px;
+    font-weight:bold;
+}
+
+#reiniciar{
+    background:#edf2f3;
+}
+
+.tela{
+    margin-top:20px;
+}
+
+.escondido{
+    display:none;
+}
+
+/* MENU */
+
+.inicio{
+    background:white;
+    text-align:center;
+    padding:35px;
+    border-radius:22px;
+    box-shadow:0 5px 20px #0001;
+}
+
+.inicio .icone{
+    font-size:65px;
+}
+
+.inicio h2{
+    margin:10px 0;
+}
+
+.inicio p{
+    color:#667;
+}
+
+.estatisticas-menu{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:20px;
+}
+
+.estatisticas-menu span{
+    background:#edf8f2;
+    padding:10px 18px;
+    border-radius:10px;
+}
+
+.titulo{
+    margin:25px 0 12px;
+}
+
+.fases{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.fase{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 5px 15px #0001;
+    border:2px solid #e3e9e6;
+}
+
+.fase.bloqueada{
+    opacity:.55;
+}
+
+.icone-fase{
+    font-size:42px;
+}
+
+.fase h3{
+    margin:10px 0;
+}
+
+.fase p{
+    color:#68747a;
+    min-height:40px;
+    font-size:14px;
+}
+
+.fase button{
+    width:100%;
+    margin-top:15px;
+    background:#23885e;
+    color:white;
+}
+
+.fase button:disabled{
+    background:#aaa;
+}
+
+.medalha{
+    display:inline-block;
+    margin-top:10px;
+    background:#fff0ae;
+    padding:5px 10px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+/* QUIZ */
+
+.topo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+#voltar{
+    background:#edf2f3;
+}
+
+.progresso-container{
+    flex:1;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.barra{
+    height:10px;
+    background:#d5dedb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+#barraProgresso{
+    height:100%;
+    width:0;
+    background:#23885e;
+    transition:.3s;
+}
+
+.vidas{
+    font-size:21px;
+}
+
+.pergunta-box{
+    background:white;
+    padding:30px;
+    border-radius:22px;
+    margin-top:20px;
+    box-shadow:0 5px 20px #0001;
+}
+
+.assunto{
+    display:inline-block;
+    background:#e3f5ec;
+    color:#16764c;
+    padding:7px 12px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+#pergunta{
+    margin:20px 0;
+    font-size:25px;
+}
+
+.respostas{
+    display:grid;
+    gap:12px;
+}
+
+.resposta{
+    background:#fafafa;
+    border:2px solid #dce5e2;
+    text-align:left;
+    width:100%;
+}
+
+.resposta:hover:not(:disabled){
+    border-color:#39a36f;
+}
+
+.correta{
+    background:#d9f5e5 !important;
+    border-color:#30a66b !important;
+}
+
+.errada{
+    background:#ffe0e0 !important;
+    border-color:#df6b6b !important;
+}
+
+#feedback{
+    min-height:30px;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+#proxima{
+    background:#23885e;
+    color:white;
+    display:none;
+}
+
+/* RESULTADO */
+
+.resultado{
+    background:white;
+    max-width:600px;
+    margin:auto;
+    padding:40px;
+    text-align:center;
+    border-radius:22px;
+    box-shadow:0 5px 20px #0001;
+}
+
+.resultado-icon{
+    font-size:70px;
+}
+
+.resultado h2{
+    margin:10px 0;
+}
+
+.resultado p{
+    color:#667;
+}
+
+.resultado-info{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin:25px;
+}
+
+.resultado-info div{
+    background:#edf5f1;
+    padding:15px 25px;
+    border-radius:12px;
+}
+
+.resultado-info strong{
+    display:block;
+    font-size:25px;
+    color:#19764f;
+}
+
+#voltarMapa{
+    background:#23885e;
+    color:white;
+}
+
+/* CELULAR */
+
+@media(max-width:650px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .topo{
+        flex-wrap:wrap;
+    }
+
+    .progresso-container{
+        order:3;
+        flex-basis:100%;
+    }
+
+    #pergunta{
+        font-size:21px;
+    }
+
+    .estatisticas-menu{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+    <div>
+        <h1>🧬 BioAventura</h1>
+        <p>Desafio de Biologia - 9º Ano</p>
+    </div>
+
+    <button id="reiniciar">
+        🔄 Reiniciar
+    </button>
+
+</header>
+
+
+<!-- ================= MENU ================= -->
+
+<section id="menu" class="tela">
+
+    <div class="inicio">
+
+        <div class="icone">🔬</div>
+
+        <h2>BioAventura</h2>
+
+        <p>
+            Responda às perguntas, ganhe pontos
+            e desbloqueie todas as fases!
+        </p>
+
+        <div class="estatisticas-menu">
+
+            <span>
+                ⭐ Pontos:
+                <b id="pontos">0</b>
+            </span>
+
+            <span>
+                🏆 Medalhas:
+                <b id="medalhas">0</b>
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="titulo">
+        🗺️ Mapa das Fases
+    </h2>
+
+    <div id="fases" class="fases"></div>
+
+</section>
+
+
+<!-- ================= QUIZ ================= -->
+
+<section id="quiz" class="tela escondido">
+
+    <div class="topo">
+
+        <button id="voltar">
+            ← Fases
+        </button>
+
+        <div class="progresso-container">
+
+            <div class="info">
+
+                <span id="nomeFase"></span>
+
+                <span id="numero"></span>
+
+            </div>
+
+            <div class="barra">
+
+                <div id="barraProgresso"></div>
+
+            </div>
+
+        </div>
+
+        <div class="vidas" id="vidas">
+            ❤️❤️❤️
+        </div>
+
+    </div>
+
+
+    <div class="pergunta-box">
+
+        <span id="assunto" class="assunto"></span>
+
+        <h2 id="pergunta"></h2>
+
+        <div id="respostas" class="respostas"></div>
+
+        <p id="feedback"></p>
+
+        <button id="proxima">
+            Próxima pergunta →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESULTADO ================= -->
+
+<section id="resultado" class="tela escondido">
+
+    <div class="resultado">
+
+        <div id="resultadoIcon" class="resultado-icon">
+            🏆
+        </div>
+
+        <h2 id="resultadoTitulo">
+            Fase concluída!
+        </h2>
+
+        <p id="resultadoTexto"></p>
+
+
+        <div class="resultado-info">
+
+            <div>
+                <strong id="resultadoPontos">
+                    0
+                </strong>
+
+                <small>
+                    Pontos
+                </small>
+            </div>
+
+            <div>
+                <strong id="resultadoAcertos">
+                    0/10
+                </strong>
+
+                <small>
+                    Acertos
+                </small>
+            </div>
+
+        </div>
+
+
+        <button id="voltarMapa">
+            🗺️ Voltar para o mapa
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   DADOS DAS FASES
+========================================= */
+
+const fases = [
+
+{
+    nome:"Mundo das Células",
+    icone:"🔬",
+    descricao:"Aprenda sobre células e organelas.",
+
+    perguntas:[
+
+        {
+            pergunta:"Qual estrutura controla as atividades da célula?",
+
+            respostas:[
+                "Núcleo",
+                "Parede celular",
+                "Ribossomo",
+                "Citoplasma"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Qual organela produz energia para a célula?",
+
+            respostas:[
+                "Lisossomo",
+                "Mitocôndria",
+                "Vacúolo",
+                "Núcleo"
+            ],
+
+            correta:1
+        },
+
+        {
+            pergunta:"Qual estrutura está presente em células animais e vegetais?",
+
+            respostas:[
+                "Cloroplasto",
+                "Parede celular",
+                "Membrana plasmática",
+                "Vacúolo central"
+            ],
+
+            correta:2
+        },
+
+        {
+            pergunta:"As células vegetais possuem cloroplastos para realizar:",
+
+            respostas:[
+                "Digestão",
+                "Fotossíntese",
+                "Respiração",
+                "Divisão"
+            ],
+
+            correta:1
+        },
+
+        {
+            pergunta:"A unidade básica dos seres vivos é:",
+
+            respostas:[
+                "Órgão",
+                "Tecido",
+                "Célula",
+                "Sistema"
+            ],
+
+            correta:2
+        }
+
+    ]
+},
+
+
+{
+    nome:"Reprodução",
+    icone:"🧬",
+    descricao:"Aprenda sobre reprodução e fecundação.",
+
+    perguntas:[
+
+        {
+            pergunta:"A união do espermatozoide com o óvulo é chamada de:",
+
+            respostas:[
+                "Ovulação",
+                "Fecundação",
+                "Menstruação",
+                "Mitose"
+            ],
+
+            correta:1
+        },
+
+        {
+            pergunta:"O gameta masculino humano é:",
+
+            respostas:[
+                "Óvulo",
+                "Embrião",
+                "Espermatozoide",
+                "Zigoto"
+            ],
+
+            correta:2
+        },
+
+        {
+            pergunta:"O gameta feminino humano é:",
+
+            respostas:[
+                "Óvulo",
+                "Espermatozoide",
+                "Zigoto",
+                "Embrião"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"O zigoto surge após:",
+
+            respostas:[
+                "Fecundação",
+                "Respiração",
+                "Digestão",
+                "Fotossíntese"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"A reprodução assexuada geralmente envolve:",
+
+            respostas:[
+                "Um único organismo",
+                "Dois gametas",
+                "Fecundação",
+                "Somente animais"
+            ],
+
+            correta:0
+        }
+
+    ]
+},
+
+
+{
+    nome:"Vírus em Ação",
+    icone:"🦠",
+    descricao:"Aprenda sobre vírus, doenças e vacinas.",
+
+    perguntas:[
+
+        {
+            pergunta:"Os vírus são considerados:",
+
+            respostas:[
+                "Células completas",
+                "Acelulares",
+                "Bactérias",
+                "Fungos"
+            ],
+
+            correta:1
+        },
+
+        {
+            pergunta:"Os vírus precisam de uma célula hospedeira para:",
+
+            respostas:[
+                "Se reproduzir",
+                "Fazer fotossíntese",
+                "Produzir ossos",
+                "Digestionar alimentos"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"A vacinação ajuda a:",
+
+            respostas:[
+                "Preparar o sistema imunológico",
+                "Causar doenças",
+                "Substituir o sangue",
+                "Produzir bactérias"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Qual doença é causada por vírus?",
+
+            respostas:[
+                "Gripe",
+                "Tétano",
+                "Tuberculose",
+                "Cólera"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Uma maneira importante de prevenir doenças é:",
+
+            respostas:[
+                "Lavar as mãos",
+                "Compartilhar objetos pessoais",
+                "Não tomar vacinas",
+                "Não beber água"
+            ],
+
+            correta:0
+        }
+
+    ]
+},
+
+
+{
+    nome:"Corpo Humano",
+    icone:"🫀",
+    descricao:"Explore os sistemas do corpo humano.",
+
+    perguntas:[
+
+        {
+            pergunta:"Qual órgão bombeia o sangue?",
+
+            respostas:[
+                "Pulmão",
+                "Coração",
+                "Fígado",
+                "Estômago"
+            ],
+
+            correta:1
+        },
+
+        {
+            pergunta:"Qual sistema realiza a digestão?",
+
+            respostas:[
+                "Digestório",
+                "Nervoso",
+                "Respiratório",
+                "Urinário"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"As trocas gasosas acontecem principalmente nos:",
+
+            respostas:[
+                "Alvéolos",
+                "Rins",
+                "Ossos",
+                "Músculos"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"O cérebro pertence ao sistema:",
+
+            respostas:[
+                "Nervoso",
+                "Digestório",
+                "Respiratório",
+                "Urinário"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Os rins pertencem ao sistema:",
+
+            respostas:[
+                "Urinário",
+                "Respiratório",
+                "Nervoso",
+                "Reprodutor"
+            ],
+
+            correta:0
+        }
+
+    ]
+},
+
+
+{
+    nome:"Evolução",
+    icone:"🦎",
+    descricao:"Entenda a evolução e a seleção natural.",
+
+    perguntas:[
+
+        {
+            pergunta:"Quem é associado à seleção natural?",
+
+            respostas:[
+                "Charles Darwin",
+                "Gregor Mendel",
+                "Isaac Newton",
+                "Louis Pasteur"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"A seleção natural favorece características que:",
+
+            respostas:[
+                "Ajudam na sobrevivência e reprodução",
+                "Sempre deixam o animal maior",
+                "Eliminam toda diversidade",
+                "Nunca mudam"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"A evolução acontece ao longo de:",
+
+            respostas:[
+                "Gerações",
+                "Minutos",
+                "Uma refeição",
+                "Uma única vida"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Fósseis podem fornecer evidências sobre:",
+
+            respostas:[
+                "Organismos do passado",
+                "Somente o clima",
+                "Somente vírus",
+                "Espécies que nunca mudaram"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"A diversidade genética é importante para:",
+
+            respostas:[
+                "A evolução das populações",
+                "A digestão",
+                "A respiração",
+                "A produção de água"
+            ],
+
+            correta:0
+        }
+
+    ]
+},
+
+
+{
+    nome:"Ecologia",
+    icone:"🌱",
+    descricao:"Proteja os ecossistemas e a biodiversidade.",
+
+    perguntas:[
+
+        {
+            pergunta:"Os produtores de uma cadeia alimentar são geralmente:",
+
+            respostas:[
+                "Plantas e algas",
+                "Carnívoros",
+                "Fungos",
+                "Humanos"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Os consumidores obtêm energia principalmente ao:",
+
+            respostas:[
+                "Alimentar-se de outros organismos",
+                "Fazer fotossíntese",
+                "Produzir luz",
+                "Respirar água"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Os decompositores incluem principalmente:",
+
+            respostas:[
+                "Fungos e bactérias",
+                "Leões",
+                "Árvores",
+                "Peixes"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Seres vivos e fatores não vivos formam um:",
+
+            respostas:[
+                "Ecossistema",
+                "Órgão",
+                "Cromossomo",
+                "Tecido"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Biodiversidade significa:",
+
+            respostas:[
+                "Variedade de seres vivos",
+                "Quantidade de água",
+                "Somente árvores",
+                "Temperatura"
+            ],
+
+            correta:0
+        }
+
+    ]
+},
+
+
+{
+    nome:"Genética - Desafio Final",
+    icone:"🧪",
+    descricao:"Teste seus conhecimentos sobre DNA e genes.",
+
+    perguntas:[
+
+        {
+            pergunta:"O DNA está relacionado principalmente à:",
+
+            respostas:[
+                "Informação genética",
+                "Digestão",
+                "Respiração",
+                "Produção de urina"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Os genes são segmentos de:",
+
+            respostas:[
+                "DNA",
+                "Água",
+                "Gordura",
+                "Cálcio"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Gregor Mendel estudou principalmente:",
+
+            respostas:[
+                "Hereditariedade",
+                "Ecologia",
+                "Vírus",
+                "Sistema respiratório"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"Uma versão de um gene é chamada de:",
+
+            respostas:[
+                "Alelo",
+                "Órgão",
+                "Tecido",
+                "Vírus"
+            ],
+
+            correta:0
+        },
+
+        {
+            pergunta:"A genética ajuda a explicar:",
+
+            respostas:[
+                "Como características são herdadas",
+                "Como os rios se formam",
+                "Somente a fotossíntese",
+                "Somente a digestão"
+            ],
+
+            correta:0
+        }
+
+    ]
+}
+
+];
+
+
+/* =========================================
+   VARIÁVEIS
+========================================= */
+
+let faseAtual = 0;
+
+let perguntaAtual = 0;
+
+let acertos = 0;
+
+let vidas = 3;
+
+let pontos = 0;
+
+let pontosFase = 0;
+
+let fasesDesbloqueadas =
+    Number(localStorage.getItem("fases")) || 1;
+
+let medalhas =
+    Number(localStorage.getItem("medalhas")) || 0;
+
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const menu =
+    document.getElementById("menu");
+
+const quiz =
+    document.getElementById("quiz");
+
+const resultado =
+    document.getElementById("resultado");
+
+
+/* =========================================
+   SALVAR
+========================================= */
+
+function salvar(){
+
+    localStorage.setItem(
+        "fases",
+        fasesDesbloqueadas
+    );
+
+    localStorage.setItem(
+        "medalhas",
+        medalhas
+    );
+
+    localStorage.setItem(
+        "pontos",
+        pontos
+    );
+}
+
+
+/* =========================================
+   MOSTRAR FASES
+========================================= */
+
+function mostrarFases(){
+
+    pontos =
+        Number(localStorage.getItem("pontos")) || 0;
+
+    document.getElementById("pontos")
+        .textContent = pontos;
+
+    document.getElementById("medalhas")
+        .textContent = medalhas;
+
+
+    const container =
+        document.getElementById("fases");
+
+    container.innerHTML = "";
+
+
+    fases.forEach((fase,index)=>{
+
+        const div =
+            document.createElement("div");
+
+        div.className = "fase";
+
+
+        if(index >= fasesDesbloqueadas){
+
+            div.classList.add("bloqueada");
+
+        }
+
+
+        const concluida =
+            localStorage.getItem(
+                "medalha"+index
+            );
+
+
+        div.innerHTML = `
+
+            <div class="icone-fase">
+                ${
+                    index < fasesDesbloqueadas
+                    ? fase.icone
+                    : "🔒"
+                }
+            </div>
+
+            <h3>
+                Fase ${index+1}:
+                ${fase.nome}
+            </h3>
+
+            <p>
+                ${fase.descricao}
+            </p>
+
+            ${
+                concluida
+                ?
+                '<span class="medalha">🏅 Concluída</span>'
+                :
+                ''
+            }
+
+            <button
+                ${
+                    index >= fasesDesbloqueadas
+                    ? "disabled"
+                    : ""
+                }
+                onclick="iniciarFase(${index})">
+
+                ${
+                    index >= fasesDesbloqueadas
+                    ? "🔒 Bloqueada"
+                    : "Jogar"
+                }
+
+            </button>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================
+   INICIAR FASE
+========================================= */
+
+function iniciarFase(index){
+
+    faseAtual = index;
+
+    perguntaAtual = 0;
+
+    acertos = 0;
+
+    vidas = 3;
+
+    pontosFase = 0;
+
+
+    menu.classList.add("escondido");
+
+    quiz.classList.remove("escondido");
+
+    resultado.classList.add("escondido");
+
+
+    carregarPergunta();
+
+}
+
+
+/* =========================================
+   CARREGAR PERGUNTA
+========================================= */
+
+function carregarPergunta(){
+
+    const fase =
+        fases[faseAtual];
+
+    const pergunta =
+        fase.perguntas[perguntaAtual];
+
+
+    document.getElementById("nomeFase")
+        .textContent =
+        "Fase " +
+        (faseAtual+1) +
+        " - " +
+        fase.nome;
+
+
+    document.getElementById("numero")
+        .textContent =
+        (perguntaAtual+1) +
+        "/" +
+        fase.perguntas.length;
+
+
+    document.getElementById("barraProgresso")
+        .style.width =
+        (
+            perguntaAtual /
+            fase.perguntas.length
+        ) * 100 + "%";
+
+
+    document.getElementById("assunto")
+        .textContent =
+        fase.nome;
+
+
+    document.getElementById("pergunta")
+        .textContent =
+        pergunta.pergunta;
+
+
+    document.getElementById("feedback")
+        .textContent = "";
+
+
+    const respostas =
+        document.getElementById("respostas");
+
+    respostas.innerHTML = "";
+
+
+    document.getElementById("proxima")
+        .style.display = "none";
+
+
+    pergunta.respostas.forEach(
+        (resposta,index)=>{
+
+            const botao =
+                document.createElement("button");
+
+            botao.className =
+                "resposta";
+
+            botao.textContent =
+                String.fromCharCode(65+index)
+                + ") "
+                + resposta;
+
+            botao.onclick =
+                ()=>responder(index);
+
+            respostas.appendChild(botao);
+
+        }
+    );
+
+
+    atualizarVidas();
+
+}
+
+
+/* =========================================
+   RESPONDER
+========================================= */
+
+function responder(escolha){
+
+    const pergunta =
+        fases[faseAtual]
+        .perguntas[perguntaAtual];
+
+
+    const botoes =
+        document.querySelectorAll(
+            ".resposta"
+        );
+
+
+    botoes.forEach(
+        botao =>
+        botao.disabled = true
+    );
+
+
+    if(escolha === pergunta.correta){
+
+        acertos++;
+
+        pontosFase += 100;
+
+        pontos += 100;
+
+
+        botoes[escolha]
+            .classList.add("correta");
+
+
+        document.getElementById("feedback")
+            .textContent =
+            "✅ Muito bem! +100 pontos";
+
+    }
+
+    else{
+
+        vidas--;
+
+
+        botoes[escolha]
+            .classList.add("errada");
+
+
+        botoes[pergunta.correta]
+            .classList.add("correta");
+
+
+        document.getElementById("feedback")
+            .textContent =
+            "❌ Resposta errada!";
+
+    }
+
+
+    atualizarVidas();
+
+    salvar();
+
+
+    document.getElementById("proxima")
+        .style.display = "inline-block";
+
+
+    if(
+        perguntaAtual ===
+        fases[faseAtual].perguntas.length-1
+    ){
+
+        document.getElementById("proxima")
+            .textContent =
+            "🏆 Ver resultado";
+
+    }
+
+}
+
+
+/* =========================================
+   PRÓXIMA
+========================================= */
+
+document.getElementById("proxima")
+.onclick = function(){
+
+    if(
+        vidas <= 0 ||
+        perguntaAtual ===
+        fases[faseAtual].perguntas.length-1
+    ){
+
+        finalizar();
+
+        return;
+
+    }
+
+
+    perguntaAtual++;
+
+    carregarPergunta();
+
+};
+
+
+/* =========================================
+   VIDAS
+========================================= */
+
+function atualizarVidas(){
+
+    document.getElementById("vidas")
+        .textContent =
+        "❤️".repeat(vidas) +
+        "🖤".repeat(3-vidas);
+
+}
+
+
+/* =========================================
+   FINALIZAR
+========================================= */
+
+function finalizar(){
+
+    const total =
+        fases[faseAtual].perguntas.length;
+
+
+    const passou =
+        vidas > 0 &&
+        acertos >= Math.ceil(total*0.7);
+
+
+    quiz.classList.add("escondido");
+
+    resultado.classList.remove("escondido");
+
+
+    document.getElementById(
+        "resultadoPontos"
+    ).textContent =
+        pontosFase;
+
+
+    document.getElementById(
+        "resultadoAcertos"
+    ).textContent =
+        acertos + "/" + total;
+
+
+    if(passou){
+
+        document.getElementById(
+            "resultadoIcon"
+        ).textContent =
+            "🏆";
+
+
+        document.getElementById(
+            "resultadoTitulo"
+        ).textContent =
+            "Parabéns! Fase concluída!";
+
+
+        document.getElementById(
+            "resultadoTexto"
+        ).textContent =
+            "Você desbloqueou a próxima fase!";
+
+
+        if(
+            !localStorage.getItem(
+                "medalha"+faseAtual
+            )
+        ){
+
+            medalhas++;
+
+            localStorage.setItem(
+                "medalha"+faseAtual,
+                "1"
+            );
+
+        }
+
+
+        if(
+            fasesDesbloqueadas <=
+            faseAtual+1
+        ){
+
+            fasesDesbloqueadas =
+                faseAtual+2;
+
+        }
+
+    }
+
+    else{
+
+        document.getElementById(
+            "resultadoIcon"
+        ).textContent =
+            "💪";
+
+
+        document.getElementById(
+            "resultadoTitulo"
+        ).textContent =
+            "Você quase conseguiu!";
+
+
+        document.getElementById(
+            "resultadoTexto"
+        ).textContent =
+            "Tente novamente para desbloquear a próxima fase.";
+
+    }
+
+
+    salvar();
+
+}
+
+
+/* =========================================
+   VOLTAR
+========================================= */
+
+document.getElementById("voltar")
+.onclick = function(){
+
+    quiz.classList.add("escondido");
+
+    menu.classList.remove("escondido");
+
+    mostrarFases();
+
+};
+
+
+document.getElementById("voltarMapa")
+.onclick = function(){
+
+    resultado.classList.add("escondido");
+
+    menu.classList.remove("escondido");
+
+    mostrarFases();
+
+};
+
+
+/* =========================================
+   REINICIAR
+========================================= */
+
+document.getElementById("reiniciar")
+.onclick = function(){
+
+    if(
+        confirm(
+            "Apagar todo o progresso?"
+        )
+    ){
+
+        localStorage.clear();
+
+        fasesDesbloqueadas = 1;
+
+        medalhas = 0;
+
+        pontos = 0;
+
+        mostrarFases();
+
+    }
+
+};
+
+
+/* =========================================
+   COMEÇAR
+========================================= */
+
+mostrarFases();
+
+</script>
+
+</body>
+</html>
